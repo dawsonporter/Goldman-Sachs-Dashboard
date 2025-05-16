@@ -63,7 +63,7 @@ COLOR_SCHEME = {
     'danger': '#F44336',  # Red for danger metrics
 }
 
-# Bank name mapping for display
+# Bank name mapping for display - Fixed naming for Goldman Sachs
 BANK_NAME_MAPPING = {
     "Goldman Sachs Bank USA": "Goldman Sachs",
     "JPMorgan Chase Bank, National Association": "JPMorgan Chase",
@@ -76,7 +76,7 @@ BANK_NAME_MAPPING = {
     "Capital One, National Association": "Capital One"
 }
 
-# Bank information for API queries
+# Bank information for API queries - Fixed naming for Goldman Sachs
 BANK_INFO = [
     {"cert": "33124", "name": "Goldman Sachs Bank USA"},
     {"cert": "628", "name": "JPMorgan Chase Bank, National Association"},
@@ -374,7 +374,7 @@ class BankDataRepository:
                                           "Bank of America, National Association",
                                           "Wells Fargo Bank, National Association",
                                           "Citibank, National Association"]
-            is_medium_bank = bank_name in ["GOLDMAN SACHS BANK USA", 
+            is_medium_bank = bank_name in ["Goldman Sachs Bank USA", 
                                            "U.S. Bank National Association",
                                            "PNC Bank, National Association",
                                            "Truist Bank"] 
@@ -399,7 +399,7 @@ class BankDataRepository:
                 tier1_capital = assets * 0.1 * np.random.uniform(0.9, 1.1)
                 
                 # For Goldman Sachs, adjust for investment banking focus
-                if bank_name == "GOLDMAN SACHS BANK USA":
+                if bank_name == "Goldman Sachs Bank USA":
                     deposits = assets * 0.6 * np.random.uniform(0.9, 1.1) # Lower deposits ratio
                     loans = assets * 0.4 * np.random.uniform(0.9, 1.1)    # Lower loans ratio
                     tier1_capital = assets * 0.12 * np.random.uniform(0.9, 1.1) # Higher capital ratio
@@ -1157,11 +1157,11 @@ class DashboardBuilder:
             all_available_banks = sorted(list(set(self.df['Bank'].unique()) - {'Goldman Sachs'}))
             logger.info(f"Available banks for selection: {len(all_available_banks)}")
             
-            # Create the dropdown with ALL available banks as options
+            # Create the dropdown with ALL available banks as options and select all by default
             return dcc.Dropdown(
                 id='individual-peer-selector',
                 options=[{'label': peer, 'value': peer} for peer in all_available_banks],
-                value=all_available_banks[:4],  # Show first 4 peers by default
+                value=all_available_banks,  # Select all peers by default
                 multi=True,
                 style={'width': '100%', 'color': COLOR_SCHEME['text']},
             )
@@ -1197,10 +1197,13 @@ class DashboardBuilder:
             Input('individual-peer-selector', 'value')
         )
         def update_selected_peers_info(selected_peers):
+            # Improved display to ensure all peers are visible
             return html.Div([
                 html.P(f"Selected Peers: {len(selected_peers)} banks", style={"fontWeight": "bold"}),
-                html.P(", ".join(selected_peers[:5]) + ("..." if len(selected_peers) > 5 else ""), 
-                       style={"fontSize": "0.8rem"})
+                html.Div(
+                    [html.Span(peer, className="selected-peer-tag") for peer in selected_peers],
+                    className="selected-peers-container"
+                )
             ], style={"margin-top": "10px", "color": COLOR_SCHEME['text']})
         
         # Callback for updating the bar chart and metric overview
@@ -2095,6 +2098,19 @@ class DashboardBuilder:
             }
             .bank-detail-col {
                 padding: 0 10px;
+            }
+            .selected-peers-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+                margin-top: 5px;
+            }
+            .selected-peer-tag {
+                background: #f0f0f0;
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-size: 0.8rem;
+                white-space: nowrap;
             }
             
             /* Mobile responsive design */
