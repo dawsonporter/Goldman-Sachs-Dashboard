@@ -22,7 +22,7 @@ This dashboard provides financial analysts and stakeholders with an interactive 
 
 ## Data Source
 
-The dashboard sources its data directly from the FDIC's public API (Banks Data API at https://banks.data.fdic.gov/api), which provides quarterly financial information for all FDIC-insured institutions. Key metrics include:
+The dashboard sources its data directly from the FDIC's public API (Banks Data API at https://banks.data.fdic.gov), which provides quarterly financial information for all FDIC-insured institutions. Key metrics include:
 
 - Asset and deposit information
 - Loan portfolio composition
