@@ -1499,7 +1499,7 @@ class DashboardBuilder:
             dtick = 'M24'  # Every 2 years
             tickformat = '%Y'
         
-        # Update layout with a compact legend
+        # Update layout with removed legend
         fig.update_layout(
             title=f"{metric} - {trend_timeline} Year Trend",
             margin=dict(l=50, r=20, t=50, b=50),
@@ -1507,14 +1507,7 @@ class DashboardBuilder:
             paper_bgcolor=COLOR_SCHEME['card_bg'],
             font=dict(color=COLOR_SCHEME['text']),
             hoverlabel=dict(bgcolor=COLOR_SCHEME['card_bg'], font_size=12, font_color=COLOR_SCHEME['text']),
-            legend=dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1,
-                font=dict(size=10)
-            ),
+            showlegend=False,  # Remove legend
             xaxis=dict(
                 title=None,
                 showgrid=True,
@@ -1897,7 +1890,7 @@ class DashboardBuilder:
                 padding: 0 10px;
             }
             .sidebar {
-                width: 400px;
+                width: 450px;
                 background-color: #ffffff;
                 padding: 1.5rem 1rem;
                 margin-right: 20px;
