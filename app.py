@@ -65,7 +65,7 @@ COLOR_SCHEME = {
 
 # Bank name mapping for display
 BANK_NAME_MAPPING = {
-    "GOLDMAN SACHS BANK USA": "Goldman Sachs",
+    "Goldman Sachs Bank USA": "Goldman Sachs",
     "JPMorgan Chase Bank, National Association": "JPMorgan Chase",
     "Bank of America, National Association": "Bank of America",
     "Wells Fargo Bank, National Association": "Wells Fargo",
@@ -78,7 +78,7 @@ BANK_NAME_MAPPING = {
 
 # Bank information for API queries
 BANK_INFO = [
-    {"cert": "33124", "name": "GOLDMAN SACHS BANK USA"},
+    {"cert": "33124", "name": "Goldman Sachs Bank USA"},
     {"cert": "628", "name": "JPMorgan Chase Bank, National Association"},
     {"cert": "3510", "name": "Bank of America, National Association"},
     {"cert": "3511", "name": "Wells Fargo Bank, National Association"},
