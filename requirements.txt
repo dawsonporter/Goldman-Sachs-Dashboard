@@ -1,0 +1,11 @@
+dash
+dash-bootstrap-components
+pandas
+numpy
+plotly
+requests
+scipy
+urllib3
+typing-extensions
+python-dateutil
+gunicorn
