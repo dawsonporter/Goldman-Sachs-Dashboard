@@ -38,7 +38,7 @@ else:
 # Constants
 BASE_URL = "https://banks.data.fdic.gov/api"
 DEFAULT_START_DATE = '20000331'  # March 31, 2000
-DEFAULT_END_DATE = '20241231'    # December 31, 2024
+DEFAULT_END_DATE = '20250331'    # March 31, 2025
 CACHE_DIR = 'data_cache'
 
 # Create cache directory if it doesn't exist
